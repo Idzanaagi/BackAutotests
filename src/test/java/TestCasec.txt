@@ -1,0 +1,72 @@
+id: createWpPost
+Заголовок: создать пост
+Шаги:
+1. отправить POST-запрос на /wp/v2/posts, установив query-параметры title - createPostTitle, content - createPostContent, status - publish
+Ожидаемый результат:
+1. код ответа равен 201
+2. тело ответа в формате JSON возращается от сервера и имеет следующий вид (... - любые ключи/значения, перечисленные ключи являются обязательными):
+{
+    "id": ...,
+    ...
+    "status": "publish",
+    "title": {
+        ...
+        "rendered": "createPostTitle"
+    },
+    "content": {
+        ...
+        "rendered": "<p>createPostContent</p>\n",
+    },
+    ...
+}
+3. в таблице wp_posts (БД - wordpress) появилась запись, содержащая post_title "createPostTitle", post_content "createPostContent", status "publish"
+
+id: changeWpPostTitle
+Заголовок: изменить заголовок поста
+Предусловие:
+1. отправить POST-запрос на /wp/v2/posts, установив query-параметры title - createPostTitle, content - createPostContent, status - publish
+Шаги:
+1. отправить PATCH-запрос на /wp/v2/posts/{postId} (postId - ID поста, созданного в предусловии), передав в body запроса title - New Title
+Ожидаемый результат:
+1. код ответа равен 200
+2. тело ответа в формате JSON возращается от сервера и имеет следующий вид (... - любые ключи/значения, перечисленные ключи являются обязательными):
+{
+    "id": {postId},
+    ...
+    "status": "publish",
+    "title": {
+        ...
+        "rendered": "New Title"
+    },
+    "content": {
+        ...
+        "rendered": <p>createPostContent</p>\n",
+    },
+    ...
+}
+3. в таблице wp_posts (БД - wordpress)  появилась и обновилась запись, содержащая (после обновления) post_title "New Title", post_content "createPostContent"
+
+id: deleteWpPost
+Заголовок: удалить пост
+Предусловие:
+1. отправить POST-запрос на /wp/v2/posts, установив query-параметры title - createPostTitle, content - createPostContent, status - publish
+Шаги:
+1. отправить DELETE-запрос на /wp/v2/posts/{postId} (postId - ID поста, созданного в предусловии)
+Ожидаемый результат:
+1. код ответа равен 200
+2. тело ответа в формате JSON возращается от сервера и имеет следующий вид (... - любые ключи/значения, перечисленные ключи являются обязательными):
+{
+    "id": {postId},
+    ...
+    "status": "trash",
+    "title": {
+        ...
+        "rendered": "createPostTitle"
+    },
+    "content": {
+        ...
+        "rendered": "<p>createPostContent</p>\n",
+    },
+    ...
+}
+3. в таблице wp_posts (БД - wordpress)  появилась и обновилась запись, содержащая (после обновления) post_title "createPostTitle, status "trash"
