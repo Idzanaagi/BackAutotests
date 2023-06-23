@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static props.ConfigurationManager.configuration;
+import static props.ConfigurationManager.config;
 
 /**
  * The type Data base connection.
@@ -17,8 +17,8 @@ public final class DataBaseConnection {
      * @throws SQLException the sql exception
      */
     public static Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(configuration().url(),
-                configuration().user(), configuration().password());
+        return DriverManager.getConnection(config().url(),
+                config().user(), config().password());
     }
 
     private DataBaseConnection() {

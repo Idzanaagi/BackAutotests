@@ -7,10 +7,11 @@ import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
+import pojo.Posts;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.preemptive;
-import static props.ConfigurationManager.configuration;
+import static props.ConfigurationManager.config;
 
 /**
  * The type Word press.
@@ -20,13 +21,13 @@ public final class WordpressApiManager {
     /**
      * The constant URL.
      */
-    private static final String URL = configuration().wpUrl();
+    private static final String URL = config().wpUrl();
 
     /**
      * The REQUEST_SPEC.
      */
     private static final RequestSpecification REQUEST_SPEC = new RequestSpecBuilder()
-            .setAuth(preemptive().basic(configuration().wpUsername(), configuration().wpPassword()))
+            .setAuth(preemptive().basic(config().wpUsername(), config().wpPassword()))
             .setBaseUri(URL)
             .setContentType(ContentType.JSON)
             .addFilter(new AllureRestAssured())
@@ -84,6 +85,22 @@ public final class WordpressApiManager {
                 .when()
                 .post()
                 .then();
+    }
+
+    /**
+     * Read wp post posts.
+     * @param postID the post id
+     * @return the posts
+     */
+    @Step("read WP post")
+    public static Posts readPost(final int postID) {
+        return given()
+                .spec(REQUEST_SPEC)
+                .queryParam("rest_route", "/wp/v2/posts/" + postID)
+                .when()
+                .patch()
+                .then()
+                .extract().as(Posts.class);
     }
 
     private WordpressApiManager() {
