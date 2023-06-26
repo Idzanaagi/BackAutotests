@@ -12,8 +12,8 @@ public final class ConfigurationManager {
      * Configuration configuration.
      * @return the configuration
      */
-    public static Configuration configuration() {
-        return ConfigCache.getOrCreate(Configuration.class);
+    public static Config config() {
+        return ConfigCache.getOrCreate(Config.class);
     }
 }
 

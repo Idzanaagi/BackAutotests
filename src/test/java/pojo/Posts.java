@@ -32,4 +32,30 @@ public class Posts {
      */
     @JsonProperty("post_content")
     private String postContent;
+
+    /**
+     * Gets content.
+     * @return the content
+     */
+    public Content getContent() {
+        return content;
+    }
+
+    /**
+     * The Content.
+     */
+    private Content content;
+
+    /**
+     * Gets title.
+     * @return the title
+     */
+    public Title getTitle() {
+        return title;
+    }
+
+    /**
+     * The Title.
+     */
+    private Title title;
 }

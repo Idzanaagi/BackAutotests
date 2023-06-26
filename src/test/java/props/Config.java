@@ -1,17 +1,16 @@
 package props;
 
-import org.aeonbits.owner.Config;
-
 /**
  * The interface Configuration.
  */
-@Config.LoadPolicy(Config.LoadType.MERGE)
-@Config.Sources({
+@org.aeonbits.owner.Config.LoadPolicy(org.aeonbits.owner.Config.LoadType.MERGE)
+@org.aeonbits.owner.Config.Sources({
         "system:properties",
         "classpath:database.properties",
-        "classpath:wp.properties"
+        "classpath:wp.properties",
+        "classpath:testData.properties",
 })
-public interface Configuration extends Config {
+public interface Config extends org.aeonbits.owner.Config {
 
     /**
      * Wp username string.
@@ -54,4 +53,26 @@ public interface Configuration extends Config {
      */
     @Key("password")
     String password();
+
+    /**
+     * Post title string.
+     * @return the string
+     */
+    @Key("postTitle")
+    String postTitle();
+
+    /**
+     * Post content string.
+     * @return the string
+     */
+    @Key("postContent")
+    String postContent();
+
+    /**
+     * New post title string.
+     * @return the string
+     */
+    @Key("newPostTitle")
+    String newPostTitle();
+
 }
