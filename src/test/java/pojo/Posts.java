@@ -3,6 +3,7 @@ package pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * The type Posts.
@@ -34,28 +35,21 @@ public class Posts {
     private String postContent;
 
     /**
-     * Gets content.
-     * @return the content
-     */
-    public Content getContent() {
-        return content;
-    }
-
-    /**
      * The Content.
+     * -- GETTER --
+     *  Gets content
+     * @return the content
+
      */
+    @Getter
     private Content content;
 
     /**
-     * Gets title.
+     * The Title.
+     * -- GETTER --
+     *  Gets title.
      * @return the title
      */
-    public Title getTitle() {
-        return title;
-    }
-
-    /**
-     * The Title.
-     */
+    @Getter
     private Title title;
 }

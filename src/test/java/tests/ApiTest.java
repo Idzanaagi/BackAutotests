@@ -16,7 +16,9 @@ import static db.DataBaseManager.getPost;
 import static db.DataBaseManager.deleteAllPosts;
 
 import static props.ConfigurationManager.config;
-import static wp.WordpressApiManager.*;
+import static wp.WordpressApiManager.deletePosts;
+import static wp.WordpressApiManager.readPost;
+import static wp.WordpressApiManager.updatePostTitle;
 
 /**
  * The type Api test.
